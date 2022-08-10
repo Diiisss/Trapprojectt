@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {useParams} from 'react-router-dom';
 import ItemList from './ItemList';
+import { myContext } from '../HighordercomponentHOC';
+
 
 export default function ItemListContainer() {
   const [productos, setProductos] =useState([]);
+  const  {darkMode, setDarkMode} = useContext(myContext);
 
   const { idCategoria} = useParams();
  
@@ -34,6 +37,7 @@ export default function ItemListContainer() {
 
       }
       resolve(productosharcode);
+    
      
     },500);
   })
@@ -43,7 +47,13 @@ export default function ItemListContainer() {
   })
 
   },[idCategoria]);
-  return   <ItemList productos= {productos}/>;
+  return <>
+  <div  style={{background:darkMode ? 'black':'white', color: darkMode ? 'black':'white', border : "1px solid blue", padding: '10px',margin: "10px"}}> 
+    ITEM LIST CONTAINER
+   <br />
+   <ItemList productos= {productos}/>;
+   </div>
+  </> 
 
   
       
